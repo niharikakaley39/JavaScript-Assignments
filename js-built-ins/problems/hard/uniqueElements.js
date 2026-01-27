@@ -19,7 +19,7 @@
 */
 
 function getUniqueElements(arr) {
-  // Your code here
+  return [...new Set(arr)];
 }
 
 module.exports = getUniqueElements;

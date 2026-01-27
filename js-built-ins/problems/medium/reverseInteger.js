@@ -22,7 +22,11 @@
 */
 
 function reverseInteger(num) {
-  // Your code here
+  const isNegative = num < 0;
+  const str = Math.abs(num).toString();
+  const reversedStr = str.split('').reverse().join('');
+  const reversedNum = parseInt(reversedStr, 10);
+  return isNegative ? -reversedNum : reversedNum;
 }
 
 module.exports = reverseInteger;

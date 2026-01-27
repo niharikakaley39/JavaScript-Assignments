@@ -1,4 +1,8 @@
-// ## Write to a file
+const fs = require('fs');
 
-// Using the fs library again, try to write to the contents of a file.
-// You can use the fs library to as a black box, the goal is to understand async tasks.
+const data = "This is the new content written to the file.";
+
+fs.writeFile('easy/test.txt', data, (err) => {
+    if (err) throw err;
+    console.log('The file has been saved!');
+});
