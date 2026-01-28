@@ -1,4 +1,5 @@
  //  1.Sum values in object arrays  { food: [10, 20, 30], travel: [5, 15], bills: [40, 60] }
+
    function sumValues(obj){
      let result ={}
   for(let key in obj){
@@ -14,6 +15,7 @@ sumValues(expenses)
 
 
 // 2. Count word occurrences in array  , arr = ["apple", "banana", "apple", "orange", "banana", "apple"];
+
   function countOcc(arr){
   let result ={}
   for(let i = 0 ; i < arr.length;i++){
@@ -30,6 +32,7 @@ countOcc(arr)
 
 
 // 3. Swap keys and values of object - Input: { a: "x", b: "y", c: "z" }   output  { x: "a", y: "b", z: "c" }
+
     let obj = { a: "x", b: "y", c: "z" };
 let pairs = Object.entries(obj);
 let result = {};
@@ -42,6 +45,7 @@ console.log(result);
 
 
 //4.4. **Find the largest value key**
+
     function findLargestKey(obj){
     let maxValue = -Infinity
     let maxKey = ""
@@ -58,6 +62,7 @@ findLargestKey(data)
 
 
 //5.Flatten object of arrays into one array var data = {fruits: ["apple", "banana"], veggies: ["carrot", "pea"] // output : [ 'apple', 'banana', 'carrot', 'pea' ]
+
 function flattenObject(obj){
     let result = []
 for (let  key in obj){
@@ -74,6 +79,7 @@ var data = {
 
 
     //6. **Group people by city** - Input: [ { name: "A", city: "Delhi" }, { name: "B", city: "Mumbai" }, { name: "C", city: "Delhi" }]
+
 function groupByCity(arr) {
     let result = {};
     for (let i = 0; i < arr.length; i++) {
@@ -97,6 +103,7 @@ groupByCity(people);
 
 
 //7.Filter object by values > 50    input: var data = { a: 20 , b : 60 , c: 40 , d : 90};  output: { b: 60, d: 90 }
+
   function filterGreaterThan(obj){
     let result = {}
 for (let key in obj){
@@ -111,6 +118,7 @@ for (let key in obj){
 
 
 //8. Find student with highest average mark  // { A: [80, 90], B: [70, 75, 85] }
+
     function highestAverage(obj){
     let highestAvg = 0
     let topStudent= ""
@@ -135,6 +143,7 @@ highestAverage(student);
 
 
 //9.Unique values across all object arrays  ,  Input : { x: [1,2,3], y: [2,3,4], z: [4,5] }  - Output:  [1,2,3,4,5]
+
 function uniqueValues(obj){
   let result = {}
     for(let key in obj) {
@@ -156,6 +165,7 @@ console.log(output);
 
 
     //10.Pick only given keys from object  Input :{ name: "Rahul", age: 23, city: "Noida" }, ["name","city"]      output : { name: "Rahul", city: "Noida" }
+
 function pickKeys(obj, keys) {
   let result = {};
   for (let i = 0; i < keys.length; i++) {
