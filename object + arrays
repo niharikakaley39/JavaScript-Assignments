@@ -181,9 +181,8 @@ const output = pickKeys(inputObj, keysArray);
 console.log(output);
 
 
-
-
-
+// 11 Sort object entries by values (ascending)
+const obj11 = { a: 3, b: 1, c: 2 };
 
 
 
