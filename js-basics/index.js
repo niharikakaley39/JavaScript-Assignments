@@ -130,9 +130,303 @@ const users = [
 const newMaleUsers = getMaleUsers(users);
 console.log(newMaleUsers);
   //output : [{ name: 'Rohit', age: 23, gender: 'male' },{ name: 'Rohit', age: 19, gender: 'male' }]
-     
+
+// object + arrays
+    
+//  1.Sum values in object arrays  { food: [10, 20, 30], travel: [5, 15], bills: [40, 60] }
+
+   function sumValues(obj){
+     let result ={}
+  for(let key in obj){
+      let sum = 0
+  for(let i = 0 ; i < obj[key].length;i++){
+           sum += obj[key][i]
+  }
+    result[key] = sum
+  }
+ console.log(result)
+var expenses = {food: [10, 20, 30], travel: [5, 15], bills: [40, 60] };
+sumValues(expenses)
+
+// 2. Count word occurrences in array  , arr = ["apple", "banana", "apple", "orange", "banana", "apple"];
+
+  function countOcc(arr){
+  let result ={}
+  for(let i = 0 ; i < arr.length;i++){
+   let word = arr[i]
+  if(result[word]){
+      result[word] = result[word] + 1
+  }
+  else {
+      result[word] = 1
+  }
+  console.log(result)
+  var arr = ["apple", "banana", "apple", "orange", "banana", "apple"]
+countOcc(arr)
 
 
+// 3. Swap keys and values of object - Input: { a: "x", b: "y", c: "z" }   output  { x: "a", y: "b", z: "c" }
+
+    let obj = { a: "x", b: "y", c: "z" };
+let pairs = Object.entries(obj);
+let result = {};
+for (let i = 0; i < pairs.length; i++) {
+    let key = pairs[i][0];
+    let value = pairs[i][1];
+    result[value] = key;
+}
+console.log(result);
+
+
+//4.4. **Find the largest value key**
+
+    function findLargestKey(obj){
+    let maxValue = -Infinity
+    let maxKey = ""
+    for(let key in obj){
+        if(obj[key] > maxValue){
+            maxValue = obj[key]
+            maxKey = key
+        }
+    }
+    console.log(maxKey)
+}
+var data = { a: 10, b: 50, c: 20 }
+findLargestKey(data)
+
+
+//5.Flatten object of arrays into one array var data = {fruits: ["apple", "banana"], veggies: ["carrot", "pea"] // output : [ 'apple', 'banana', 'carrot', 'pea' ]
+
+function flattenObject(obj){
+    let result = []
+for (let  key in obj){
+    for(let i = 0 ; i < obj[key].length; i++){
+        result.push(obj[key][i]);
+    }
+}
+console.log(result);
+}
+var data = {
+    fruits: ["apple", "banana"],
+    veggies: ["carrot", "pea"]
+};
+
+
+    //6. **Group people by city** - Input: [ { name: "A", city: "Delhi" }, { name: "B", city: "Mumbai" }, { name: "C", city: "Delhi" }]
+
+function groupByCity(arr) {
+    let result = {};
+    for (let i = 0; i < arr.length; i++) {
+        let city = arr[i].city;
+        let name = arr[i].name;
+        if (result[city]) {
+            result[city].push(name);
+        } else {
+            result[city] = [name];
+        }
+    }
+    console.log(result);
+}
+var people = [
+    { name: "A", city: "Delhi" },
+    { name: "B", city: "Mumbai" },
+    { name: "C", city: "Delhi" }
+];
+groupByCity(people);        
+// { Delhi: [ 'A', 'C' ], Mumbai: [ 'B' ] }
+
+
+//7.Filter object by values > 50    input: var data = { a: 20 , b : 60 , c: 40 , d : 90};  output: { b: 60, d: 90 }
+
+  function filterGreaterThan(obj){
+    let result = {}
+for (let key in obj){
+    if(obj[key] > 50){
+        result[key] = obj[key];
+    }
+}
+ console.log(result)
+}
+ var data = { a: 20 , b : 60 , c: 40 , d : 90};
+ filterGreaterThan(data)
+
+
+//8. Find student with highest average mark  // { A: [80, 90], B: [70, 75, 85] }
+
+    function highestAverage(obj){
+    let highestAvg = 0
+    let topStudent= ""
+    for(let student in obj){
+        let marks = obj[student]
+        let sum = 0
+    for(let i = 0 ; i < marks.length ;i++){
+        sum += marks[i]
+    }
+    let avg = sum/ marks.length
+    if(avg > highestAvg){
+        highestAvg = avg
+        topStudent = student;
+    }
+    }
+    console.log(topStudent);
+}
+var student ={A: [80, 90],
+    B: [70, 75, 85]
+};
+highestAverage(student);
+
+
+//9.Unique values across all object arrays  ,  Input : { x: [1,2,3], y: [2,3,4], z: [4,5] }  - Output:  [1,2,3,4,5]
+
+function uniqueValues(obj){
+  let result = {}
+    for(let key in obj) {
+      let arr = obj[key]
+      for(let i = 0 ; i < arr.length; i++){
+        if(!result.includes(arr[i]));
+      }
+    }
+}
+    return result
+  }
+    const input = {
+    x: [1, 2, 3] ,
+    y :[2, 3, 4] , 
+    z: [4, 5]
+};
+const output = getUniqueValues(input);
+console.log(output);
+
+    //10.Pick only given keys from object  Input :{ name: "Rahul", age: 23, city: "Noida" }, ["name","city"]      output : { name: "Rahul", city: "Noida" }
+
+function pickKeys(obj, keys) {
+  let result = {};
+  for (let i = 0; i < keys.length; i++) {
+    if (obj[keys[i]] !== undefined) {
+      result[keys[i]] = obj[keys[i]];
+    }
+  }
+  return result;
+}
+const inputObj = { name: "Rahul", age: 23, city: "Noida" };
+const keysArray = ["name", "city"];
+const output = pickKeys(inputObj, keysArray);
+console.log(output);
+
+//11. Sort object entries by values (ascending)
+     function highestAverage(obj) {
+    let maxAvg = -Infinity;
+    let topStudent = "";
+    for (let student in obj) {
+        let marks = obj[student];
+        let sum = 0;
+        for (let mark of marks) {
+            sum += mark;
+        }
+        let avg = sum / marks.length;
+        if (avg > maxAvg) {
+            maxAvg = avg;
+            topStudent = student;
+        }
+    }
+    return topStudent;
+} 
+      
+// 12 Count number of keys in object
+const obj12 = { a: 1, b: 2, c: 3 };
+function fun12(obj) {
+  return Object.keys(obj).length;
+}
+      
+//13) Capitalize string values inside object
+      function fun13(obj){
+     for (let key in obj){
+        obj[key] = obj[key][0].toUpperCase()+ obj[key].slice(1);
+     }
+     return obj
+}
+ const obj13 = { name: "alice", city: "delhi" };
+ console.log(fun13(obj13))
+
+ //14. Convert Object Query into String
+ function toQueryString(obj) {
+  return new URLSearchParams(obj).toString();
+ }
+ const obj = { name: "Alice", age: 25 };
+console.log(toQueryString(obj));
+
+//15.Count even and odd numbers in array
+      const array = [1,2,3,4,5,6];
+function fun(array) {
+  const countObj = {even: 0, odd: 0};
+  for(let num in array) {
+    if( num % 2 === 0) 
+        countObj.even += 1;
+    else 
+        countObj.odd += 1;
+  }
+  return countObj;
+}
+console.log(fun(array))
+
+//16. Find common keys between two objects
+    const fun16 = (obj1, obj2) =>
+    Object.keys(obj1).filter(key => Object.hasOwn(obj2, key));
+   console.log(fun16({ a: 1, b: 2, c: 3 }, { b: 4, c: 5, d: 6 })
+);
+
+//17.Convert array of objects to lookup by id
+const array = [
+  { id: 1, name: "A" },
+  { id: 2, name: "B" }
+];
+const func = (array) => {
+  const newObj = {};
+  for (let item of array) {
+    newObj[item.id] = item;
+  }
+  return newObj;
+};
+console.log(func(array));
+
+//18.Check if all values in object are numbers
+const obj18 = { a: 1, b: "hello", c: 3 }; 
+function fun(obj) {
+  for(let value of Object.values(obj)) {
+    // console.log(typeof typeof value);
+    if(typeof value !== "number") return false;
+  }
+  return true;
+}
+
+//19.Check if all values in object are numbers
+function func(obj){
+    for(let key in obj){
+        if(typeof obj[key] != "number"){
+            return false;
+        }
+        return true;
+    }
+}
+console.log(func({ a: 1, b: "hello", c: 3 })); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
 
 
