@@ -1,25 +1,323 @@
+//20 intermediate (Objects + Arrays)
+function sumTransaction (transactions){
+    const result ={};
+    for (const transaction of transactions) {
+  const user = transaction.user;
+  const amount = transaction.amount;
+  if(result[user]){
+     result[user] += amount;
+  }
+  else{
+    result[user] = amount;
+  }
+}
+return result;
+}
+input = [
+  { user: "A", amount: 100 },
+  { user: "B", amount: 200 },
+  { user: "A", amount: 50 }
+];
+console.log(sumTransaction(input))
+
+//21.Transform API response to object (id → name)
+const input = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" }
+];
+const output = input.reduce((obj, item) =>{
+  obj[item.id] = item.name;
+  return obj;
+} , {});
+console.log(output);
+
+//22.Remove falsy values from object
+function func(obj){
+  const newObj = {};
+  for(const[key , value] of Object.entries(obj)){
+    if(value != null){
+      newObj[key] = value;
+    }
+  }
+  return newObj;
+}
+const input = {
+  a: 0,
+  b: null,
+  c: "hello",
+  d: undefined,
+  e: 5
+};
+console.log(func(input))
+
+//23.Check for permissions from roles
+const roles = {
+  admin: ["read", "write"],
+  user: ["read"],
+  staff: ["write"]
+};
+const checkrole = "user";
+const action = "write"
+const haspermission =  roles[checkrole]?.includes(action) || false;
+console.log(haspermission)
+
+//24.Transform array of orders into revenue per category
+const input = [
+  { id: 1, category: "electronics", price: 100 },
+  { id: 2, category: "clothes", price: 50 },
+  { id: 3, category: "electronics", price: 200 }
+];
+const output = input.reduce((acc,item) =>{
+  acc[item.category] = (acc[item.category] || 0) + item.price;
+  return acc;
+}, {});
+console.log(output);
+
+//25.Remove duplicate objects by id
+const array25 = [
+  { id: 1, name: "A" },
+  { id: 2, name: "B" },
+  { id: 1, name: "A" }
+];
+const output = Array.from(
+  new Map(array25.map(item => [item.id, item])).values()
+);
+console.log(output);
+     
+//26.const input = { a: 1, b: 2, c: 3, d: 4 };
+const size = 2;
+const entries = Object.entries(input);
+const output = [];
+for (let i = 0; i < entries.length; i += size) {
+  output.push(entries.slice(i, i + size));
+}
+console.log(output);
+
+//27.Find longest string among object values
+const input = { a: "apple", b: "banana", c: "kiwi" };
+const output = Object.values(input).reduce(
+  (longest, current) => current.length > longest.length ? current : longest
+);
+console.log(output);
+
+//28.Convert the object where languages are the top-level keys, and inside each are translation strings by key into an object where translation keys are the top-level keys, and inside each you store values per language [HARD**]
+const input ={
+  en:{hello:"Hello" , bye: "Goodbye"},
+  fr:{hello:"Bonjour" ,bye:"Au revoir"},
+  es:{hello:"Hola"}
+};
+const output = {};
+for(const lang in input){
+  for(const key in input[lang]){
+    if(!output[key]){
+      output[key] = {};
+    }
+    output[key][lang] =input[lang][key];
+  }
+}
+console.log(output);
+
+//29.Remove deeply nested key from object
+const input = { a: { b: { c: 1, d: 2 } } };
+delete input.a.b.c;
+console.log(input);
+
+//30.Check if two objects are deeply equal
+function deepEqual(obj1, obj2){
+if(obj1 == obj2) return true;
+if(typeof obj1 !== "object" ||typeof obj2 !== "object" || obj1 === null || obj2 === null){
+return false;
+}
+const keys1 = Object.keys(obj1);
+const keys2 = Object.keys(obj2);
+if(keys1.length !== keys2.length) return false;
+for(const key of keys1){
+if(!keys2.includes(key)) return false;
+if(!deepEqual(obj1[key] , obj2[key])) return false;
+}
+return true;
+}
+const objA = {a: {x :1, y :2}};
+const objB = {a: {x : 1 , y: 2}};
+console.log(deepEqual(objA, objB));
+
+31.//Deep flatten nested arrays inside object
+const input = { a: [1, [2, [3]]], b: [4, [5]] };
+const flattenArray = (arr) =>
+  arr.reduce(
+    (acc, val) =>
+      Array.isArray(val) ? acc.concat(flattenArray(val)) : acc.concat(val),
+    []
+  );
+const output = {};
+for (const key in input) {
+  output[key] = flattenArray(input[key]);
+}
+console.log(output);
+
+32.//Find most repeated word across categories
+const input = {
+  fruits: ["apple", "apple", "banana"],
+  drinks: ["apple", "tea"]
+};
+const freq = {};
+let maxWord = "";
+let maxCount = 0;
+for (const category in input) {
+  for (const word of input[category]) {
+    freq[word] = (freq[word] || 0) + 1;
+    if (freq[word] > maxCount) {
+      maxCount = freq[word];
+      maxWord = word;
+    }
+  }
+}
+console.log(maxWord);
+
+//33.Find intersection of all arrays in object
+const input = { 
+  a: [1, 2, 3], 
+  b: [2, 3, 4], 
+  c: [3, 4, 5] 
+};
+const arrays = Object.values(input);
+const output = arrays.reduce((acc, curr) =>
+  acc.filter(value => curr.includes(value))
+);
+console.log(output);
+
+//34.Deep merge two nested objects
+function deepMerge(obj1, obj2) {
+  const result = { ...obj1 };
+  for (const key in obj2) {
+    if (
+      typeof obj2[key] === "object" &&
+      obj2[key] !== null &&
+      typeof result[key] === "object"
+    ) {
+      result[key] = deepMerge(result[key], obj2[key]);
+    } else {
+      result[key] = obj2[key];
+    }
+  }
+  return result;
+}
+const obj1 = { a: { x: 1, y: 2 } };
+const obj2 = { a: { y: 3, z: 4 } };
+console.log(deepMerge(obj1, obj2));
+
+//35.Find intersection of all arrays in object
+const obj36 = { a: [1,2,3], b: [2,3,4], c: [3,4,5] };
+function fun36(obj) { // TC: O(M*N*P)
+  const values = Object.values(obj);
+  const firstArray = values[0];
+  const interSectionArray = [];
+  for(let val of firstArray) { // O(M)
+    let flag = true;
+    for(let i = 1; i < values.length; i++) { // O(N)
+       if(!values[i].includes(val)) flag = false; // O(P)
+    }
+    if(flag) interSectionArray.push(val);
+  }
+
+  return interSectionArray;
+}
+console.log(fun36(obj36));
+
+//37.Deep merge two nested objects
+const obj37 = { a: { x: 1, y: 2 } };
+const obj371  = { a: { y: 3, z: 4 } };
+function fun37(obj1, obj2) {
+  const mergeObj = structuredClone(obj1);
+  const keyValues = Object.entries(obj2);
+  // console.log(keyValues);
+  for(let [key, value] of keyValues) {
+    if(!mergeObj[key] || typeof mergeObj[key] !== 'object' || typeof value !== 'object') {
+      mergeObj[key] = value;
+    } else {
+      mergeObj[key] = fun37(mergeObj[key], value);
+    }
+  }
+  return mergeObj;
+}
+console.log(fun37(obj37, obj371));
+
+//38. Nested object destructuring
+function fun38(obj) {
+  const entries = Object.entries(obj);
+  console.log(entries);
+  let string = '';
+  for(let [key, value] of entries ) {
+    if(typeof value === 'object') {
+      string += fun38(value);
+    }
+    else if(string === '') {
+      string += value;
+    } else {
+      string += ' ' + value;
+    }
+  }
+  
+  return string;
+}
+console.log(fun38(obj38));
+
+//39.Find top N keys by value
+    const obj39 = { a: 10, b: 50, c: 30, d: 40 }, N39 = 2;
+function fun39(obj, N) {
+  const entries = Object.entries(obj);
+  console.log(entries);
+  entries.sort(([,valueA], [, valueB]) => {
+    return valueB - valueA;
+  })
+  console.log(entries);
+  const topKeys = [];
+  for(let i = 0; i < N; i++) {
+    topKeys.push(entries[i][0]);
+  }
+  return topKeys;
+}
+
+//40.Sort array of objects by name then age
+const array40 = [
+  { name: "Alice", age: 30 },
+  { name: "Bob", age: 25 },
+  { name: "Alice", age: 22 }
+];
+
+function fun40(array) {
+  const newArray = array.slice();
+  console.log(newArray);
+  newArray.sort((a,b) => {
+    if(a.name === b.name) {
+      return a.age - b.age;
+    } 
+    else if(a.name >  b.name) {
+      return 1;
+    }
+    return -1;
+  })
+  return newArray;
+}
+ console.log(fun40(array40));
+
+//41.Reconcile two lists (missing + extra items)
+const expected = ["a", "b", "c"];
+const actual = ["b", "c", "d"];
+const result = {
+  missing: expected.filter(item => !actual.includes(item)),
+  extra: actual.filter(item => !expected.includes(item))
+};
+console.log(result);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
+//42.Merge two objects (no sum, override second)
+const obj1 = { a: 10, b: 20 };
+const obj2 = { a: 5, c: 15 };
+const obj1 = { a: 10, b: 20 };
+const obj2 = { a: 5, c: 15 };
+const result = Object.assign({}, obj1, obj2);
+console.log(result)
 
 
 
