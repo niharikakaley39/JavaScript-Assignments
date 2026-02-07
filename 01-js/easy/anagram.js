@@ -7,18 +7,17 @@
   - `npm run test-anagram`
 */
 function isAnagram(str1, str2) {
+    if (typeof str1 !== 'string' || typeof str2 !== 'string') {
+        return false;
+    }
+    const cleanString = (str) =>
+        str
+            .toLowerCase()
+            .replace( /\s/g, '')
+            .split('')
+            .sort()
+            .join('');
 
-  if (str1.length !== str2.length) {
-      return false;
-  }
-
-
-  function sortString(str) {
-      return str.toLowerCase().split('').sort().join('');
-  }
-
-
-  return sortString(str1) === sortString(str2);
+    return cleanString(str1) === cleanString(str2);
 }
-
 module.exports = isAnagram;
