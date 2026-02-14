@@ -20,7 +20,17 @@
 
 
 function findDuplicates(arr) {
-  return arr.filter((ele, index) => arr.indexOf(ele) !== index);
+ const seen = new Set();
+  const duplicates = new Set();
+  for(const num of arr){
+    if(seen.has(num)){
+      duplicates.add(num);
+    }
+    else{
+      seen.add(num);
+    }
+  }
+  return [...duplicates];
 }
 
 module.exports = findDuplicates;
