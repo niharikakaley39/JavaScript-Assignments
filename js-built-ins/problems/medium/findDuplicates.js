@@ -32,6 +32,7 @@ function findDuplicates(arr) {
   }
   return [...duplicates];
 }
-
-module.exports = findDuplicates;
+if (require.main === module) {
+  console.log(findDuplicates([10, 20, 30, 10, 40]));
+}
 
