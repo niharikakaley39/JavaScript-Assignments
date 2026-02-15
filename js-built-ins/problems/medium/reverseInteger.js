@@ -22,7 +22,10 @@
 */
 
 function reverseInteger(num) {
-  // Your code here
+   const sign = Math.sign(num);
+  const reversed = parseInt(
+    Math.abs(num).toString().split('').reverse().join('')
+  );
+  return sign * reversed;
 }
-
 module.exports = reverseInteger;
