@@ -24,16 +24,14 @@
   Once you've implemented the logic, test your code by running
   - `npm run test-perfect`
 */
-
-if (num <= 1) return false;
-   let sum = 0;
-   for(let i = 1 ; i <= num /2 ; i++){
-       if(num % i === 0){
-        sum += i;
-       }
-   }
-return sum === num;
+function isPerfectNumber(num) {
+  if (num <= 1) return false;
+  let sum = 0;
+  for (let i = 1; i <= Math.floor(num / 2); i++) {
+    if (num % i === 0) {
+      sum += i;
+    }
   }
-  if(require.main === module){
-console.log(isPerfectNumber(31));
-  }
+  return sum === num;
+}
+module.exports = {isPerfectNumber} ;
