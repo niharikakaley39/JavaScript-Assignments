@@ -20,10 +20,9 @@
   Once you've implemented the logic, test your code by running
   - `npm run test-reverseInteger`
 */
-
 function reverseInteger(num) {
-   const sign = Math.sign(num);
-  const reversed = parseInt(
+  const sign = num < 0 ? -1 : 1;
+  const reversed = Number(
     Math.abs(num).toString().split('').reverse().join('')
   );
   return sign * reversed;
