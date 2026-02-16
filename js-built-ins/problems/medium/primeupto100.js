@@ -29,7 +29,4 @@ function getPrimesUpTo100() {
   }
   return primes;
 }
-  
-}
-
 module.exports = { getPrimesUpTo100 };
