@@ -20,9 +20,9 @@
 
 
 function findDuplicates(arr) {
- const seen = new Set();
+  const seen = new Set();
   const duplicates = new Set();
-  for(const num of arr){
+  for (const num of arr){
     if(seen.has(num)){
       duplicates.add(num);
     }
@@ -30,9 +30,6 @@ function findDuplicates(arr) {
       seen.add(num);
     }
   }
-  return [...duplicates];
+  return Array.from(duplicates);
 }
-if (require.main === module) {
-  console.log(findDuplicates([10, 20, 30, 10, 40]));
-}
-
+module.exports = findDuplicates;
